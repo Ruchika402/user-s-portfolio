@@ -1,0 +1,41 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="about-section">
+
+    {% if portfolio %}
+
+        <h2>About Me</h2>
+        <P>{{ portfolio.full_name }}</P>
+        
+        
+        {% if portfolio.about %}
+            <p>{{ portfolio.about }}</p>
+        {% else %}
+            <p>No detailed description added yet.</p>
+        {% endif %}
+
+        <h3>Skills</h3>
+
+        {% if portfolio.skills %}
+            <p>{{ portfolio.skills }}</p>
+        {% else %}
+            <p>No skills added yet.</p>
+        {% endif %}
+
+    {% else %}
+
+        <!-- Default About -->
+        <h2>About Me</h2>
+        <p>This is a professional portfolio template built using Django. 
+        Login and complete your dashboard to customize this section.</p>
+
+        <h3>Skills</h3>
+        <p>Python, Django, HTML, CSS, JavaScript</p>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

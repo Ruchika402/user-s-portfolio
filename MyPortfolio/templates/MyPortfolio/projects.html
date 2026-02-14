@@ -1,0 +1,55 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="projects-section">
+   
+    {% if projects %}
+
+        <h2>My Projects</h2>
+
+        {% for project in projects %}
+            <div class="project-card">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+
+                {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank">GitHub</a>
+                {% endif %}
+               
+                {% if project.live_link %}
+                    <a href="{{ project.live_link }}" target="_blank">Live Demo</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+    {% else %}
+        <!-- Default/Fake Projects -->
+        <h2>My Projects</h2>
+
+        <div class="project-card">
+            <h3>Personal Portfolio Website</h3>
+            <p>A responsive portfolio website built to showcase my projects, skills, and contact information.</p>
+            <a href="https://github.com/example/portfolio" target="_blank">GitHub</a>
+            <a href="https://example-portfolio.com" target="_blank">Live Demo</a>
+        </div>
+
+        <div class="project-card">
+            <h3>Task Manager App</h3>
+            <p>A web app to track daily tasks and manage productivity.</p>
+            <a href="https://github.com/example/taskmanager" target="_blank">GitHub</a>
+            <a href="https://example-taskmanager.com" target="_blank">Live Demo</a>
+        </div>
+
+        <div class="project-card">
+            <h3>Blog Platform</h3>
+            <p>A full-stack blog platform with authentication and CRUD functionality.</p>
+            <a href="https://github.com/example/blogplatform" target="_blank">GitHub</a>
+            <a href="https://example-blog.com" target="_blank">Live Demo</a>
+        </div>
+        
+    {% endif %}
+   
+</section>
+
+{% endblock %}

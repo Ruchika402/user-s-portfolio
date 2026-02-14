@@ -1,0 +1,31 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="dashboard-section">
+
+    <h2>Dashboard</h2>
+
+    <!-- ================= Portfolio Form ================= -->
+    <div class="portfolio-form">
+        <h3>Edit Your Portfolio Information</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="update_portfolio">Save Changes</button>
+        </form>
+<h3>    Manage Your Projects</h3>
+        <!-- Add Project Form -->
+        <form method="POST">
+            {% csrf_token %}
+            {{ project_form.as_p }}
+            <button type="submit" name="add_project">Add Project</button>
+        </form>
+    </div>
+
+   
+
+</section>  
+
+{% endblock %}

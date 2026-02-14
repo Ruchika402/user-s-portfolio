@@ -1,0 +1,39 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="services-section">
+
+    <h2>My Services</h2>
+
+    {% if portfolio %}
+
+        {% if portfolio.services %}
+            <p>{{ portfolio.services }}</p>
+        {% else %}
+            <p>No services added yet. Update from dashboard.</p>
+        {% endif %}
+
+    {% else %}
+
+        <!-- Default Mode -->
+        <div class="service-card">
+            <h3>Web Development</h3>
+            <p>Building responsive websites using HTML, CSS and Django.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Backend Development</h3>
+            <p>Creating powerful backend systems using Python and Django.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Portfolio Design</h3>
+            <p>Designing clean and professional personal portfolio websites.</p>
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="contact-section">
+
+    <h2>Contact Me</h2>
+
+    {% if portfolio %}
+
+        <div class="contact-details">
+            <p><strong>Email:</strong> {{ portfolio.email }}</p>
+            <p><strong>Phone:</strong> {{ portfolio.phone }}</p>
+
+            {% if portfolio.linkedin %}
+                <p><strong>LinkedIn:</strong> 
+                    <a href="{{ portfolio.linkedin }}" target="_blank">
+                        {{ portfolio.linkedin }}
+                    </a>
+                </p>
+            {% endif %}
+
+            {% if portfolio.github %}
+                <p><strong>GitHub:</strong> 
+                    <a href="{{ portfolio.github }}" target="_blank">
+                        {{ portfolio.github }}
+                    </a>
+                </p>
+            {% endif %}
+        </div>
+
+    {% else %}
+
+        <!-- Default Mode -->
+        <p>Email: example@email.com</p>
+        <p>Phone: 0000000000</p>
+        <p>LinkedIn: linkedin.com/in/username</p>
+        <p>GitHub: github.com/username</p>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

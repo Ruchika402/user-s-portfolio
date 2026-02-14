@@ -1,0 +1,35 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="hero">
+
+    {% if portfolio %}
+        <!-- ===== USER PORTFOLIO DATA ===== -->
+        <h1>{{ portfolio.full_name }}</h1>
+        <p>{{ portfolio.bio }}</p>
+
+        <div class="contact-info">
+            <p><strong>Email:</strong> {{ portfolio.email }}</p>
+            <p><strong>Phone:</strong> {{ portfolio.phone }}</p>
+        </div>
+
+        <div class="social-links">
+            {% if portfolio.github %}
+                <a href="{{ portfolio.github }}" target="_blank">GitHub</a>
+            {% endif %}
+
+            {% if portfolio.linkedin %}
+                <a href="{{ portfolio.linkedin }}" target="_blank">LinkedIn</a>
+            {% endif %}
+        </div>
+
+    {% else %}
+        <!-- ===== DEFAULT MODE (Before User Fills Dashboard) ===== -->
+        <h1>Welcome to My Portfolio</h1>
+        <p>This is a default portfolio template. Please login and complete your dashboard to generate your personalized portfolio.</p>
+    {% endif %}
+
+</section>
+
+{% endblock %}
