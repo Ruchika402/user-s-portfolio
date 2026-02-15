@@ -42,3 +42,17 @@ class ProjectForm(forms.ModelForm):
             'github_link': forms.URLInput(attrs={'placeholder': 'GitHub URL'}),
             'live_link': forms.URLInput(attrs={'placeholder': 'Live Demo URL'}),
         }
+
+
+from .models import Experience
+class ExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        fields = ['company', 'role', 'start_date', 'end_date', 'description']
+        widgets = {
+            'company': forms.TextInput(attrs={'placeholder': 'Company Name'}),
+            'role': forms.TextInput(attrs={'placeholder': 'Role/Position'}),
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Description of your role and responsibilities'}),
+        }

@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from urllib3 import request
 
-from .models import portfolios, Project
+from .models import Experience, portfolios, Project
 from .forms import RegisterForm, PortfolioForm
 
 
@@ -98,6 +98,52 @@ def contact(request):
 
     return render(request, 'MyPortfolio/contact.html', {'portfolio': portfolio})
 
+# ================= EXPERIENCE =================
+from django.shortcuts import render, redirect
+from .models import Experience
+from .forms import ExperienceForm
+from django.contrib.auth.decorators import login_required
+
+
+def experience(request):
+    portfolio = None
+    user_experiences = None
+
+    if request.user.is_authenticated:
+        try:
+            portfolio = portfolios.objects.get(user=request.user)
+        except portfolios.DoesNotExist:
+            portfolio = None
+
+        # Fetch experiences for the logged-in user
+        user_experiences = Experience.objects.filter(user=request.user)
+
+    return render(request, 'MyPortfolio/experience.html', {
+        'portfolio': portfolio,
+        'experiences': user_experiences
+    })
+
+
+# 2️⃣ Add a New Experience (OPTIONAL, only if using separate page)
+@login_required
+def add_experience(request):
+
+    if request.method == 'POST':
+        form = ExperienceForm(request.POST)
+
+        if form.is_valid():
+            new_experience = form.save(commit=False)
+            new_experience.user = request.user
+            new_experience.save()
+
+            return redirect('experience')
+
+    else:
+        form = ExperienceForm()
+
+    return render(request, 'MyPortfolio/add_experience.html', {
+        'form': form
+    })
 
 # ================= REGISTER =================
 def register_view(request):
@@ -160,8 +206,26 @@ def dashboard(request):
         project_form = ProjectForm()
 
     user_projects = Project.objects.filter(user=request.user)
+    
+
+
+    if request.method == 'POST' and 'add_experience' in request.POST:
+        exp_form = ExperienceForm(request.POST)
+        if exp_form.is_valid():
+            new_exp = exp_form.save(commit=False)
+            new_exp.user = request.user
+            new_exp.save()
+            return redirect('dashboard')
+    else:
+        exp_form = ExperienceForm()
+
+    user_experiences = Experience.objects.filter(user=request.user)
+    
+    
     return render(request, 'MyPortfolio/dashboard.html', {
         'form': form,
         'projects': user_projects,
-        'project_form': project_form
+        'project_form': project_form,
+        'experience_form': exp_form,
+        'experiences': user_experiences,
     })

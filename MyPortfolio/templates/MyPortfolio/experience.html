@@ -1,0 +1,71 @@
+{% extends 'MyPortfolio/base.html' %}
+
+{% block content %}
+
+<section class="experience-section">
+
+    <h2>Experience</h2>
+
+    {% if experiences %}
+
+        {% for exp in experiences %}
+
+            <div class="experience-item">
+
+                <h3>{{ exp.role }}</h3>
+
+                <p><strong>{{ exp.company }}</strong></p>
+
+                <p>
+                    {{ exp.start_date }} -
+                    {% if exp.end_date %}
+                        {{ exp.end_date }}
+                    {% else %}
+                        Present
+                    {% endif %}
+                </p>
+
+                {% if exp.description %}
+                    <p>{{ exp.description }}</p>
+                {% else %}
+                    <p>No description provided.</p>
+                {% endif %}
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <!-- Default Experience -->
+        <div class="experience-item">
+
+            <h3>Backend Developer Intern</h3>
+
+            <p><strong>Example Company</strong></p>
+
+            <p>Jan 2024 - Mar 2024</p>
+
+            <p>Worked on Django backend development, built REST APIs, and integrated frontend with backend.</p>
+
+        </div>
+
+        <div class="experience-item">
+
+            <h3>Full Stack Developer Trainee</h3>
+
+            <p><strong>Training Institute</strong></p>
+
+            <p>Jun 2023 - Dec 2023</p>
+
+            <p>Learned Python, Django, React, and built real-world portfolio projects.</p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
